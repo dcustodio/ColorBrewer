@@ -17,8 +17,7 @@ Example
 var colorBrew = window.ColorBrewer;
 var colorArray = colorBrew.getColor(colorB.options.DIVERGING.RdBu,3);
 ```
-
-[<i class="icon-share"></i> Synchronization][2]
+[<i class="icon-share"></i> plnker example][2]
 
 
 [1]:http://colorbrewer2.org/
