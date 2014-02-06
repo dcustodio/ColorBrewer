@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="colorBrewerLib.js"></script>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+</head>
+
+<body>
+<h1>Hello Plunker!</h1>
+<p></p>
+<script>
+
+    $( document ).ready(function() {
+        var colorB = window.ColorBrewer;
+
+        var t = colorB.getColor(colorB.options.DIVERGING.PiYG,"3")[0];
+        console.log(t);
+        $("p").html(t);
+    });
+
+</script>
+</body>
+
+</html>
