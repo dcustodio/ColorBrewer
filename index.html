@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
     <script src="colorBrewerLib.js"></script>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 </head>
 
 <body>
-<h1>Hello Plunker!</h1>
-<p></p>
+<h1>Color Brewer Test Page</h1>
+<ul class="main"></ul>
+<style type="text/css">html {
+    font-family: 'Roboto', sans-serif;
+}
+</style>
 <script>
+$( document ).ready(function() {
+    var colorB = window.ColorBrewer;
+    var list ="";
+    $.each(colorB.options, function(index, value) {
+        //console.log(index);
+        list += "<li class='options'>"+index+"<ul>";
+            $.each(value,function(_index,_value){
+                //console.log(_index);
+                list+="<li class='options'>"+_index+"<ul>";
+                for(var i=3;i<=12;i++){
+                    try {
+                    var colors = colorB.getColor(_value,i);
+                    $.each(colors,function(__index,__value){
+                    //console.log(__value);
 
-    $( document ).ready(function() {
-        var colorB = window.ColorBrewer;
+                    list+="<span style='color:"+__value+"'><b>"+(__index+1)+"</b></span>";
 
-        var t = colorB.getColor(colorB.options.DIVERGING.PiYG,"3")[0];
-        console.log(t);
-        $("p").html(t);
+                    });
+                        list +="<br />"
+                    }catch (err){console.error(err.message)};
+                }
+                list+="</ul></li>";
+            });
+         list += "</ul></li>";
+        });
+        $(".main").append(list);
     });
 
 </script>

@@ -331,7 +331,7 @@ window.ColorBrewer = (function () {
             Reds : "Reds"
         },
         DIVERGING : {
-            BrBG : "BrBg",
+            BrBG : "BrBG",
             PiYG : "PiYG",
             PRGn : "PRGn",
             PuOr : "PuOr",
