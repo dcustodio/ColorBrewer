@@ -1,9 +1,6 @@
 /**
  * Created by David on 06/02/14.
  */
-/**
- * Created by David on 06/02/14.
- */
 window.ColorBrewer = (function () {
 
     var colorBrewerLib = {};
