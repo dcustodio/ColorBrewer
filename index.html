@@ -1,48 +1,72 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
-    <script src="colorBrewerLib.js"></script>
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <link data-require="bootstrap-css@3.0.3" data-semver="3.0.3" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@3.0.3" data-semver="3.0.3" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script src="colorbrewerlib.js"></script>
+
 </head>
 
 <body>
 <h1>Color Brewer Test Page</h1>
 <a href="https://github.com/dcustodio/ColorBrewer">Github Page</a>
-<ul class="main"></ul>
-<style type="text/css">html {
-    font-family: 'Roboto', sans-serif;
-}
-</style>
+<div class="row">
+    <div class="col-xs-3">
+        <input type="text" class="form-control input-sm"/>
+    </div>
+    <div class="col-xs-1" id="colorBlock">
+        &nbsp;
+    </div>
+</div>
+<div class="m"></div>
+
 <script>
-$( document ).ready(function() {
-    var colorB = window.ColorBrewer;
-    var list ="";
-    $.each(colorB.options, function(index, value) {
-        //console.log(index);
-        list += "<li class='options'>"+index+"<ul>";
-            $.each(value,function(_index,_value){
-                //console.log(_index);
-                list+="<li class='options'>"+_index+"<ul>";
-                for(var i=3;i<=12;i++){
+    function getHex(color){
+        $("input.form-control").val(color);
+        $("#colorBlock").css("background-color",color);
+    }
+
+    $(document).ready(function() {
+        var colorB = window.ColorBrewer;
+
+        var buttons = "", content = "";
+
+        $.each(colorB.options, function(index, value) {
+            //console.log(index);
+
+            buttons += "<button type=\"button\" class=\"btn btn-default\" data-toggle=\"collapse\" data-target=\"#" + index + "\">" + index + "</button>";
+            content += "<div id=\"" + index + "\" class=\"collapse in\">";
+
+            $.each(value, function(_index, _value) {
+
+                content += "<strong>" + _value + " </strong>";
+                for (var i = 3; i <= 12; i++) {
                     try {
-                    var colors = colorB.getColor(_value,i);
-                    $.each(colors,function(__index,__value){
-                    //console.log(__value);
+                        var colors = colorB.getColor(_value, i);
+                        $.each(colors, function(__index, __value) {
+                            //console.log(__value);
 
-                    list+="<span style='color:"+__value+"'><b>"+(__index+1)+"</b></span>";
+                            content += "<span style='color:" + __value + "'><strong onclick=\"getHex('"+__value+"')\">" + (__index + 1) + "</strong></span>";
 
-                    });
-                        list +="<br />"
-                    }catch (err){console.error(err.message)};
+                        });
+
+                        content += "&nbsp;";
+                    } catch (err) {
+                        //console.error(err.message)
+                    };
                 }
-                list+="</ul></li>";
-            });
-         list += "</ul></li>";
-        });
-        $(".main").append(list);
-    });
 
+                content += "<br />"
+            });
+            content += "</div>";
+
+        });
+
+        $(".m").append(buttons + content);
+    });
 </script>
 </body>
 
